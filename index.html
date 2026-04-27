@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>KR HOST</title>
+<style>
+body {
+    margin:0;
+    font-family:Arial;
+    background:#0d1117;
+    color:white;
+    overflow-x:hidden;
+}
+
+/* NAVBAR */
+.navbar {
+    display:flex;
+    justify-content:space-between;
+    padding:20px;
+    background:#161b22;
+    position:sticky;
+    top:0;
+}
+
+.logo {
+    font-size:22px;
+    color:#5865F2;
+    font-weight:bold;
+}
+
+.nav-links a {
+    margin:0 10px;
+    cursor:pointer;
+}
+
+/* HERO */
+.hero {
+    text-align:center;
+    padding:80px 20px;
+    animation:fadeUp 1s ease;
+}
+
+.hero h1 {
+    font-size:40px;
+}
+
+.hero p {
+    color:#aaa;
+}
+
+.hero button {
+    margin-top:20px;
+    padding:12px 20px;
+    background:#5865F2;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+/* PRICING */
+.pricing {
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    padding:50px;
+    flex-wrap:wrap;
+}
+
+.card {
+    background:#161b22;
+    padding:20px;
+    width:280px;
+    border-radius:12px;
+    text-align:center;
+    transition:0.3s;
+    animation:fadeUp 1s ease;
+}
+
+.card:hover {
+    transform:translateY(-10px) scale(1.03);
+}
+
+.price {
+    font-size:28px;
+    color:#00ff9c;
+}
+
+/* INPUT */
+input {
+    width:90%;
+    padding:8px;
+    margin-top:10px;
+    border:none;
+    border-radius:6px;
+}
+
+button {
+    width:90%;
+    padding:10px;
+    background:#5865F2;
+    border:none;
+    color:white;
+    border-radius:6px;
+    cursor:pointer;
+    margin-top:10px;
+}
+
+/* ANIMATION */
+@keyframes fadeUp {
+    from {
+        opacity:0;
+        transform:translateY(40px);
+    }
+    to {
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <div class="logo">KR HOST</div>
+    <div class="nav-links">
+        <a onclick="scrollToSection('hero')">الرئيسية</a>
+        <a onclick="scrollToSection('pricing')">شراء خادم</a>
+        <a href="https://discord.gg/rGuZeugYVs" target="_blank">الدعم الفني</a>
+    </div>
+</div>
+
+<!-- HERO -->
+<div class="hero" id="hero">
+    <h1>KR STORE VPS</h1>
+    <p>سرعة - أمان - حماية DDoS قوية</p>
+    <button onclick="scrollToSection('pricing')">ابدأ الآن</button>
+</div>
+
+<!-- PRICING -->
+<div class="pricing" id="pricing">
+
+    <!-- VPS 1 -->
+    <div class="card">
+        <h2>VPS 1</h2>
+        <p>
+        6GB RAM<br>
+        4 CPU<br>
+        100GB NVMe
+        </p>
+
+        <div class="price" id="price">30 ريال</div>
+
+        <input type="text" id="coupon" placeholder="كود الخصم">
+        <button onclick="applyDiscount()">تطبيق</button>
+
+        <button onclick="buy()">شراء الآن</button>
+
+        <p id="msg"></p>
+    </div>
+
+</div>
+
+<script>
+let originalPrice = 30;
+let discounted = false;
+
+function scrollToSection(id) {
+    document.getElementById(id).scrollIntoView({ behavior: "smooth" });
+}
+
+function applyDiscount() {
+    let code = document.getElementById("coupon").value;
+
+    if(code === "KRHOST1KR" && !discounted) {
+        let newPrice = originalPrice - (originalPrice * 0.10);
+        document.getElementById("price").innerText = newPrice.toFixed(2) + " ريال";
+        document.getElementById("msg").innerText = "تم الخصم 10% ✅";
+        discounted = true;
+    } else if(discounted) {
+        document.getElementById("msg").innerText = "تم استخدامه ⚠️";
+    } else {
+        document.getElementById("msg").innerText = "كود خطأ ❌";
+    }
+}
+
+function buy() {
+    window.location.href = "https://discord.gg/rGuZeugYVs";
+}
+</script>
+
+</body>
+</html>
